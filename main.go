@@ -78,8 +78,14 @@ func main() {
 			// And finally, send a message containing the data received.
 			msg := tgbotapi.NewMessage(update.CallbackQuery.Message.Chat.ID, update.CallbackQuery.Data)
 			msg.Text = "قیمت را وارد کنید:"
-			if _, err := bot.Send(update.CallbackQuery.Data); err != nil {
+			if _, err := bot.Send(msg); err != nil {
 				panic(err)
+			}
+
+			answers := bot.GetUpdatesChan(u)
+			for answer := range answers {
+				msg := tgbotapi.NewMessage(answer.Message.Chat.ID, answer.Message.Text)
+				bot.Send(msg)
 			}
 		}
 	}
