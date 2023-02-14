@@ -8,7 +8,7 @@ import (
 
 var numericKeyboard = tgbotapi.NewInlineKeyboardMarkup(
 	tgbotapi.NewInlineKeyboardRow(
-		tgbotapi.NewInlineKeyboardButtonURL("1.com", "http://1.com"),
+		tgbotapi.NewInlineKeyboardButtonData("🍊️ پرتقال", "🍊️ پرتقال"),
 		tgbotapi.NewInlineKeyboardButtonData("2", "2"),
 		tgbotapi.NewInlineKeyboardButtonData("3", "3"),
 	),
@@ -16,6 +16,13 @@ var numericKeyboard = tgbotapi.NewInlineKeyboardMarkup(
 		tgbotapi.NewInlineKeyboardButtonData("4", "4"),
 		tgbotapi.NewInlineKeyboardButtonData("5", "5"),
 		tgbotapi.NewInlineKeyboardButtonData("6", "6"),
+	),
+)
+
+var mainKeyboard = tgbotapi.NewReplyKeyboard(
+	tgbotapi.NewKeyboardButtonRow(
+		tgbotapi.NewKeyboardButton("خرید"),
+		tgbotapi.NewKeyboardButton("فروش"),
 	),
 )
 
@@ -42,11 +49,17 @@ func main() {
 			// the text that we received.
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
 
+			msg.ReplyMarkup = mainKeyboard
 			// If the message was open, add a copy of our numeric keyboard.
 			switch update.Message.Text {
-			case "open":
+			case "فروش":
 				msg.ReplyMarkup = numericKeyboard
 
+			case "🍊️ پرتقال":
+				msg2 := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
+				msg2.ReplyToMessageID = update.Message.MessageID
+				msg2.Text = "خب پرتقال چی؟"
+				bot.Send(msg2)
 			}
 
 			// Send the message.
