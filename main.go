@@ -82,11 +82,9 @@ func main() {
 				panic(err)
 			}
 
-			answers := bot.GetUpdatesChan(u)
-			for answer := range answers {
-				msg := tgbotapi.NewMessage(answer.Message.Chat.ID, answer.Message.Text)
-				bot.Send(msg)
-			}
+			msg2 := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
+			bot.Send(msg2)
+
 		}
 	}
 }
