@@ -77,8 +77,8 @@ func main() {
 
 			// And finally, send a message containing the data received.
 			msg := tgbotapi.NewMessage(update.CallbackQuery.Message.Chat.ID, update.CallbackQuery.Data)
-			msg.Text = "hiii"
-			if _, err := bot.Send(msg); err != nil {
+			msg.Text = "قیمت را وارد کنید:"
+			if _, err := bot.Send(update.CallbackQuery.Data); err != nil {
 				panic(err)
 			}
 		}
