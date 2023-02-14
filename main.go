@@ -55,11 +55,12 @@ func main() {
 			case "فروش":
 				msg.ReplyMarkup = numericKeyboard
 
-			case "🍊️ پرتقال":
-				msg2 := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
-				msg2.ReplyToMessageID = update.Message.MessageID
-				msg2.Text = "خب پرتقال چی؟"
-				bot.Send(msg2)
+				// case "🍊️ پرتقال":
+				// 	msg2 := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
+				// 	msg2.ReplyToMessageID = update.Message.MessageID
+				// 	msg2.Text = "خب پرتقال چی؟"
+				// 	bot.Send(msg2)
+				// }
 			}
 
 			// Send the message.
@@ -76,6 +77,7 @@ func main() {
 
 			// And finally, send a message containing the data received.
 			msg := tgbotapi.NewMessage(update.CallbackQuery.Message.Chat.ID, update.CallbackQuery.Data)
+			msg.Text = "hiii"
 			if _, err := bot.Send(msg); err != nil {
 				panic(err)
 			}
